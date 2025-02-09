@@ -1,0 +1,37 @@
+{
+  "name": "01-ecommerce-full-project",
+  "version": "1.0.0",
+  "description": "Full demo ecommerce website with MERN full stack web development by Shamsuzzaha Sumon",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sazzadsoft7/Ecommerce-website-Express.JS-React.JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sazzadsoft7/Ecommerce-website-Express.JS-React.JS/issues"
+  },
+  "homepage": "https://github.com/sazzadsoft7/Ecommerce-website-Express.JS-React.JS#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-fileupload": "^1.5.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.10.0",
+    "nodemailer": "^6.10.0",
+    "nodemon": "^3.1.9",
+    "xss-clean": "^0.1.4"
+  }
+}
