@@ -1,6 +1,6 @@
 // -------import-----------
 import express from 'express';
-// import router from './routes/api.js';
+import router from './routes/api.js';
 const app= new express();
 
 // Security middleware to limit repeated requests from the same IP (Prevents DDoS attacks & brute-force attacks)
@@ -31,16 +31,9 @@ import mongoose from 'mongoose';
 import path from 'path';
 
 // Importing environment variables and configuration settings
-import { MONGODB_STRING, MONGODB_OPTION, JSON_SIZE, RATE_LIMIT_TIME, TIME_LIMIT_INTERVAL } from './app/config/config.js';
-import {LIMIT_MESSAGE} from "./app/config/config.js";
+import {LIMIT_MESSAGE, MONGODB_STRING, MONGODB_OPTION, JSON_SIZE, RATE_LIMIT_TIME, TIME_LIMIT_INTERVAL } from './app/config/config.js';
 
 
-//-------- MongoDB connection--------
-mongoose.connect(MONGODB_STRING,MONGODB_OPTION).then((res)=>{
-    console.log("Database Connected")
-}).catch((err)=>{
-    console.log(err)
-})
 
 //---------- use packages--------
 // Set security HTTP headers
@@ -76,8 +69,16 @@ app.use(express.urlencoded({ limit: JSON_SIZE, extended: true }));
 // Disable ETag generation to prevent caching validation overhead and manual caching management
 app.set('etag', false);
 
+
+// -------- MongoDB connection--------
+mongoose.connect(MONGODB_STRING,MONGODB_OPTION).then((res)=>{
+    console.log("Database Connected")
+}).catch((err)=>{
+    console.log(err)
+})
+
 // Use the router for API version 1 (this will handle requests to '/api/v1')
-// app.use("/api/v1", router);
+app.use("/api/v1", router);
 
 // -----------React front-end-----------
 // Add React Front End Routing

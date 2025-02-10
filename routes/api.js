@@ -1,30 +1,29 @@
-// import express from 'express';
-// const ProductController=require('../controllers/ProductController')
-// const UserController=require('../controllers/UserController')
-// const WishListController=require('../controllers/WishListController')
-// const CartListController=require('../controllers/CartListController')
-// const InvoiceController = require("../controllers/InvoiceController");
-// const FeaturesController = require("../controllers/FeaturesController");
-//
-// const AuthVerification=require('../middlewares/AuthVerification')
-//
-//
-// const router=express.Router();
-//
-// // Product
-// router.get('/ProductBrandList',ProductController.ProductBrandList)
-// router.get('/ProductCategoryList',ProductController.ProductCategoryList)
-// router.get('/ProductSliderList',ProductController.ProductSliderList)
-// router.get('/ProductListByBrand/:BrandID',ProductController.ProductListByBrand)
-// router.get('/ProductListByCategory/:CategoryID',ProductController.ProductListByCategory)
-// router.get('/ProductListBySmilier/:CategoryID',ProductController.ProductListBySmilier)
-// router.get('/ProductListByKeyword/:Keyword',ProductController.ProductListByKeyword)
-// router.get('/ProductListByRemark/:Remark',ProductController.ProductListByRemark)
-// router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
-// router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
-//
-// router.post('/ProductListByFilter',ProductController.ProductListByFilter);
-//
+import express from 'express';
+import * as ProductController from '../app/controllers/ProductController.js'
+
+const router=express.Router();
+
+// -------Product API----------
+// ----List---
+router.get('/ProductBrandList',ProductController.ProductBrandList)
+router.get('/ProductCategoryList',ProductController.ProductCategoryList)
+router.get('/ProductSliderList',ProductController.ProductSliderList)
+router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
+router.post('/ProductListByFilter',ProductController.ProductListByFilter);
+
+// ----List By-----
+router.get('/ProductListByBrand/:BrandID',ProductController.ProductListByBrand)
+router.get('/ProductListByCategory/:CategoryID',ProductController.ProductListByCategory)
+router.get('/ProductListBySimilar/:CategoryID',ProductController.ProductListBySimilar)
+router.get('/ProductListByKeyword/:Keyword',ProductController.ProductListByKeyword)
+router.get('/ProductListByRemark/:Remark',ProductController.ProductListByRemark)
+
+// -----view------
+router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
+
+//--- Create Review---
+// router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
+
 //
 // // User
 // router.get('/UserOTP/:email',UserController.UserOTP)
@@ -74,9 +73,7 @@
 // // Features
 // router.get('/FeaturesList',FeaturesController.FeaturesList)
 // router.get('/LegalDetails/:type',FeaturesController.LegalDetails)
-//
-// // Create Review
-// router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
-//
-//
-// module.exports=router;
+
+
+
+export default router;
