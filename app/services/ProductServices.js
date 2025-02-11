@@ -3,8 +3,7 @@ import BrandModel from '../models/productModels/BrandModel.js'
 import CategoryModel from '../models/productModels/CategoryModel.js'
 import ProductModel from '../models/productModels/ProductModel.js'
 import ProductSliderModel from '../models/productModels/ProductSliderModel.js'
-// import ProductDetailsModel from '../models/productModels/ProductDetailsModel.js'
-import ReviewModel from '../models/productModels/ReviewModel.js'
+
 
 const ObjectId=mongoose.Types.ObjectId;
 
@@ -39,31 +38,7 @@ const SliderListService = async () => {
     }
 }
 
-// Review List
-const ReviewListService = async (req) => {
 
-    try {
-
-        let ProductID=new ObjectId(req.params.ProductID);
-        let MatchStage={$match:{productID:ProductID}}
-
-        let JoinWithProfileStage= {$lookup:{from:"profiles",localField:"userID",foreignField:"userID",as:"profile"}};
-        let UnwindProfileStage={$unwind:"$profile"}
-        let ProjectionStage= {$project: {'des': 1, 'rating': 1, 'profile.cus_name': 1}}
-
-        let data= await  ReviewModel.aggregate([
-            MatchStage,
-            JoinWithProfileStage,
-            UnwindProfileStage,
-            ProjectionStage
-        ])
-
-        return {status:"success",data:data}
-    }catch (e) {
-        return {status:"fail",data:e}.toString()
-    }
-
-}
 
 
 // ---------List By----------------
@@ -306,29 +281,9 @@ const DetailsService = async (req) => {
 
 }
 
-// -----------Create---------
-// create review
-const CreateReviewService = async (req) => {
-    try{
-        let user_id=req.headers.user_id;
-        let reqBody=req.body;
-        let data=await ReviewModel.create({
-             productID:reqBody['productID'],
-             userID:user_id,
-             des:reqBody['des'],
-             rating:reqBody['rating'],
-         })
-        return {status:"success",data:data}
-    }
-    catch (e) {
-        return {status:"fail",data:e.toString()}
-    }
-}
-
 
 export {
     ListByFilterService,
-    CreateReviewService,
     BrandListService,
     CategoryListService,
     SliderListService,
@@ -337,6 +292,5 @@ export {
     ListByRemarkService,
     ListBySimilarService,
     ListByKeywordService,
-    DetailsService,
-    ReviewListService
+    DetailsService
 }

@@ -1,14 +1,16 @@
 import express from 'express';
 import * as ProductController from '../app/controllers/ProductController.js'
+import * as UserController from '../app/controllers/UserController.js'
+import AuthVerification from "../app/middlewares/AuthVerification.js";
+
 
 const router=express.Router();
 
-// -------Product API----------
+// ======  Product API===========
 // ----List---
 router.get('/ProductBrandList',ProductController.ProductBrandList)
 router.get('/ProductCategoryList',ProductController.ProductCategoryList)
 router.get('/ProductSliderList',ProductController.ProductSliderList)
-router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
 router.post('/ProductListByFilter',ProductController.ProductListByFilter);
 
 // ----List By-----
@@ -21,20 +23,19 @@ router.get('/ProductListByRemark/:Remark',ProductController.ProductListByRemark)
 // -----view------
 router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
 
-//--- Create Review---
-// router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
 
-//
-// // User
-// router.get('/UserOTP/:email',UserController.UserOTP)
-// router.get('/VerifyLogin/:email/:otp',UserController.VerifyLogin)
-// router.get('/UserLogout',AuthVerification,UserController.UserLogout)
-// router.post('/CreateProfile',AuthVerification,UserController.CreateProfile)
-// router.post('/UpdateProfile',AuthVerification,UserController.UpdateProfile)
-// router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
-//
-//
-//
+
+
+// =========== User ==============
+router.get('/UserOTP/:email',UserController.UserOTP)
+router.get('/VerifyLogin/:email/:otp',UserController.VerifyLogin)
+router.get('/UserLogout',AuthVerification,UserController.UserLogout)
+router.post('/CreateProfile',AuthVerification,UserController.CreateProfile)
+router.post('/UpdateProfile',AuthVerification,UserController.UpdateProfile)
+router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
+
+
+
 // // Wish
 // router.post('/SaveWishList',AuthVerification,WishListController.SaveWishList)
 // router.post('/RemoveWishList',AuthVerification,WishListController.RemoveWishList)
@@ -48,6 +49,12 @@ router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
 // router.post('/RemoveCartList',AuthVerification,CartListController.RemoveCartList)
 // router.get('/CartList',AuthVerification,CartListController.CartList)
 //
+//-========== Review API---============
+// router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
+// router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
+
+
+
 // // Invoice & Payment
 // router.get('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
 //

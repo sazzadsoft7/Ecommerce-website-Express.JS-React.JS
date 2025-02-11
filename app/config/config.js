@@ -13,8 +13,4 @@ export const RATE_LIMIT_TIME = 60*60*1000;
 export const TIME_LIMIT_INTERVAL = 1000;
 export const LIMIT_MESSAGE = 'Too many requests, please try again after some time';
 
-// Token expire time
-export const TOKEN_EXPIRATION = '24h';
 
-// Email from
-export const EMAIL_FROM = 'XYZ Ecommerce Solution <info@teamrabbil.com>';
