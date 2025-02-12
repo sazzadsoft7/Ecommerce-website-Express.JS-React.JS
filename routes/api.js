@@ -2,7 +2,8 @@ import express from 'express';
 import * as ProductController from '../app/controllers/ProductController.js'
 import * as UserController from '../app/controllers/UserController.js'
 import AuthVerification from "../app/middlewares/AuthVerification.js";
-
+import * as CartListController from '../app/controllers/CartListController.js'
+import * as WishListController from "../app/controllers/WishListController.js";
 
 const router=express.Router();
 
@@ -36,19 +37,18 @@ router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
 
 
 
-// // Wish
-// router.post('/SaveWishList',AuthVerification,WishListController.SaveWishList)
-// router.post('/RemoveWishList',AuthVerification,WishListController.RemoveWishList)
-// router.get('/WishList',AuthVerification,WishListController.WishList)
-//
-//
-//
-// // Cart
-// router.post('/SaveCartList',AuthVerification,CartListController.SaveCartList)
-// router.post('/UpdateCartList/:cartID',AuthVerification,CartListController.UpdateCartList)
-// router.post('/RemoveCartList',AuthVerification,CartListController.RemoveCartList)
-// router.get('/CartList',AuthVerification,CartListController.CartList)
-//
+// ================ Wish list==================
+router.post('/SaveWishList',AuthVerification,WishListController.SaveWishList)
+router.post('/RemoveWishList',AuthVerification,WishListController.RemoveWishList)
+router.get('/WishList',AuthVerification,WishListController.WishList)
+
+
+// ======= Cart list ===========
+router.post('/SaveCartList',AuthVerification,CartListController.SaveCartList)
+router.post('/UpdateCartList/:cartID',AuthVerification,CartListController.UpdateCartList)
+router.post('/RemoveCartList',AuthVerification,CartListController.RemoveCartList)
+router.get('/CartList',AuthVerification,CartListController.CartList)
+
 //-========== Review API---============
 // router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
 // router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)

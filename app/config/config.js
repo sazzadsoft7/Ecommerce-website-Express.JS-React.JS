@@ -2,7 +2,7 @@
 export const PORT=5030;
 
 // Database connection (don't type localhost)
-export const MONGODB_STRING="mongodb://127.0.0.1:27017/ecommerce"
+export const MONGODB_STRING="mongodb+srv://zoha:zoha12@cluster0.tx8br.mongodb.net/ecommerce"
 export const MONGODB_OPTION={user:'',pass:"",autoIndex:true};
 
 //Json size
