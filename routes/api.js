@@ -4,6 +4,8 @@ import * as UserController from '../app/controllers/UserController.js'
 import AuthVerification from "../app/middlewares/AuthVerification.js";
 import * as CartListController from '../app/controllers/CartListController.js'
 import * as WishListController from "../app/controllers/WishListController.js";
+import * as reviewController from "../app/controllers/reviewController.js";
+import * as FeaturesController from "../app/controllers/FeaturesController.js";
 
 const router=express.Router();
 
@@ -49,21 +51,21 @@ router.post('/UpdateCartList/:cartID',AuthVerification,CartListController.Update
 router.post('/RemoveCartList',AuthVerification,CartListController.RemoveCartList)
 router.get('/CartList',AuthVerification,CartListController.CartList)
 
+
+
 //-========== Review API---============
-// router.post('/CreateReview',AuthVerification,ProductController.CreateReview)
-// router.get('/ProductReviewList/:ProductID',ProductController.ProductReviewList)
+router.post('/CreateReview',AuthVerification,reviewController.CreateReview)
+router.get('/ProductReviewList/:ProductID',reviewController.ProductReviewList)
+
+
+//=========== Features============
+router.get('/FeaturesList',FeaturesController.FeaturesList)
+router.get('/LegalDetails/:type',FeaturesController.LegalDetails)
 
 
 
 // // Invoice & Payment
 // router.get('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -77,9 +79,6 @@ router.get('/CartList',AuthVerification,CartListController.CartList)
 // router.post('/PaymentIPN/:trxID',InvoiceController.PaymentIPN)
 //
 //
-// // Features
-// router.get('/FeaturesList',FeaturesController.FeaturesList)
-// router.get('/LegalDetails/:type',FeaturesController.LegalDetails)
 
 
 
