@@ -6,6 +6,7 @@ import * as CartListController from '../app/controllers/CartListController.js'
 import * as WishListController from "../app/controllers/WishListController.js";
 import * as reviewController from "../app/controllers/reviewController.js";
 import * as FeaturesController from "../app/controllers/FeaturesController.js";
+import * as InvoiceController from "../app/controllers/InvoiceController.js";
 
 const router=express.Router();
 
@@ -64,21 +65,19 @@ router.get('/LegalDetails/:type',FeaturesController.LegalDetails)
 
 
 
-// // Invoice & Payment
-// router.get('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
-//
-//
-//
-// router.get('/InvoiceList',AuthVerification,InvoiceController.InvoiceList)
-// router.get('/InvoiceProductList/:invoice_id',AuthVerification,InvoiceController.InvoiceProductList)
-//
-//
-// router.post('/PaymentSuccess/:trxID',InvoiceController.PaymentSuccess)
-// router.post('/PaymentCancel/:trxID',InvoiceController.PaymentCancel)
-// router.post('/PaymentFail/:trxID',InvoiceController.PaymentFail)
-// router.post('/PaymentIPN/:trxID',InvoiceController.PaymentIPN)
-//
-//
+// ==========Invoice & Payment========
+router.get('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
+
+
+
+router.get('/InvoiceList',AuthVerification,InvoiceController.InvoiceList)
+router.get('/InvoiceProductList/:invoice_id',AuthVerification,InvoiceController.InvoiceProductList)
+
+
+router.post('/PaymentSuccess/:trxID',InvoiceController.PaymentSuccess)
+router.post('/PaymentCancel/:trxID',InvoiceController.PaymentCancel)
+router.post('/PaymentFail/:trxID',InvoiceController.PaymentFail)
+router.post('/PaymentIPN/:trxID',InvoiceController.PaymentIPN)
 
 
 
