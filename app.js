@@ -82,9 +82,9 @@ app.use("/api/v1", router);
 
 // -----------React front-end-----------
 // Add React Front End Routing
-// app.use(express.static('client/dist'))
-// app.get('*',function (req,res) {
-//     res.sendFile(path.resolve(__dirname,'client','dist','index.html'))
-// })
+app.use(express.static('view/dist'))
+app.get('*',function (req,res) {
+    res.sendFile(path.resolve(__dirname,'view','dist','index.html'))
+})
 
 export default app;
