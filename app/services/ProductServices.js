@@ -4,11 +4,10 @@ import CategoryModel from '../models/productModels/CategoryModel.js'
 import ProductModel from '../models/productModels/ProductModel.js'
 import ProductSliderModel from '../models/productModels/ProductSliderModel.js'
 
-
 const ObjectId=mongoose.Types.ObjectId;
 
 // -----List--------
-const BrandListService = async () => {
+export const BrandListService = async () => {
         try {
            let data= await BrandModel.find();
            return {status:"success",data:data}
@@ -18,7 +17,7 @@ const BrandListService = async () => {
         }
 }
 
-const CategoryListService = async () => {
+export const CategoryListService = async () => {
     try {
         let data= await CategoryModel.find();
         return {status:"success",data:data}
@@ -28,7 +27,7 @@ const CategoryListService = async () => {
     }
 }
 
-const SliderListService = async () => {
+export const SliderListService = async () => {
     try {
         let data= await ProductSliderModel.find();
         return {status:"success",data:data}
@@ -39,12 +38,9 @@ const SliderListService = async () => {
 }
 
 
-
-
 // ---------List By----------------
-
 // List by brand
-const ListByBrandService = async (req) => {
+export const ListByBrandService = async (req) => {
 
     try {
 
@@ -81,7 +77,7 @@ const ListByBrandService = async (req) => {
 }
 
 // List by category
-const ListByCategoryService = async (req) => {
+export const ListByCategoryService = async (req) => {
     try {
 
         let CategoryID=new ObjectId(req.params.CategoryID);
@@ -104,9 +100,8 @@ const ListByCategoryService = async (req) => {
     }
 }
 
-
 // List by remark
-const ListByRemarkService = async (req) => {
+export const ListByRemarkService = async (req) => {
     try {
 
         let Remark=req.params.Remark;
@@ -130,7 +125,7 @@ const ListByRemarkService = async (req) => {
 }
 
 // List by similar
-const ListBySimilarService = async (req) => {
+export const ListBySimilarService = async (req) => {
 
     try {
         let CategoryID=new ObjectId(req.params.CategoryID);
@@ -157,7 +152,7 @@ const ListBySimilarService = async (req) => {
 }
 
 // List by Keyword
-const ListByKeywordService = async (req) => {
+export const ListByKeywordService = async (req) => {
 
     try{
         let SearchRegex={"$regex":req.params.Keyword, "$options":"i"}
@@ -183,10 +178,8 @@ const ListByKeywordService = async (req) => {
 
 }
 
-
 // List by Filter
-
-const ListByFilterService = async (req) => {
+export const ListByFilterService = async (req) => {
     try {
 
         let matchConditions = {};
@@ -244,9 +237,7 @@ const ListByFilterService = async (req) => {
 
 // -----------View-----------
 // Product details
-const DetailsService = async (req) => {
-
-
+export const DetailsService = async (req) => {
     try {
         let ProductID=new ObjectId(req.params.ProductID);
         let MatchStage={$match:{_id:ProductID}}
@@ -281,16 +272,10 @@ const DetailsService = async (req) => {
 
 }
 
-
-export {
-    ListByFilterService,
-    BrandListService,
-    CategoryListService,
-    SliderListService,
-    ListByCategoryService,
-    ListByBrandService,
-    ListByRemarkService,
-    ListBySimilarService,
-    ListByKeywordService,
-    DetailsService
-}
+// Create Product details
+// export const CreateDetailsService = async (req) => {
+//     let reqBody=req.body;
+//     let ProductID=new ObjectId(reqBody['productID']);
+//     let data=await ProductModel.updateOne({_id:ProductID},{$set:reqBody},{upsert:true})
+//     return {status:"success",data:data}
+// }

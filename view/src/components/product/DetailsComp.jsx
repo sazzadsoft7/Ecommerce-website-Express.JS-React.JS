@@ -1,27 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import productStore from "../../store/productStore.js";
 import DetailsSkeleton from "../skeleton/detailsSkeleton.jsx";
 import GalleryImage from "./galleryImage.jsx";
+import {useParams} from "react-router-dom";
+import parse from "html-react-parser"
 
 
 const DetailsComp = () => {
 
-    const {ProductDetails}=productStore();
+    const {ProductDetails, ProductDetailsRequest}=productStore();
     const [quantity,SetQuantity]=useState(1);
+
+    const {id}=useParams();
+
+    useEffect(() => {
+        (async ()=>{
+            await ProductDetailsRequest(id);
+        })()
+    }, []);
+
+
 
     // for cart and wishlist
     // const {CartFormChange,CartForm,CartSaveRequest,CartListRequest}=CartStore()
     // const {WishSaveRequest,WishListRequest}=WishStore()
 
     // -------increase & decrease quantity
-    const incrementQuantity=()=>{
-        SetQuantity(quantity=>quantity+1)
-    }
-    const decrementQuantity=()=>{
-        if(quantity>1){
-            SetQuantity(quantity=>quantity-1)
-        }
-    }
+    // const incrementQuantity=()=>{
+    //     SetQuantity(quantity=>quantity+1)
+    // }
+    // const decrementQuantity=()=>{
+    //     if(quantity>1){
+    //         SetQuantity(quantity=>quantity-1)
+    //     }
+    // }
 
 
     // -----wishlist function
@@ -60,6 +72,8 @@ const DetailsComp = () => {
                         </div>
 
                         <div className="col-md-5 p-3">
+
+                            {/*---------------Product Title--------------*/}
                             <h4>{ProductDetails[0]['title']}</h4>
                             <p className="text-muted bodySmal my-1">Category: {ProductDetails[0]['category']['categoryName']}</p>
                             <p className="text-muted bodySmal my-1">Brand: {ProductDetails[0]['brand']['brandName']}</p>
@@ -71,43 +85,49 @@ const DetailsComp = () => {
                                     <span className="bodyXLarge">Price: {ProductDetails[0]['price']}</span>
                                 )
                             }
+
+                            {/*-------Size button -------*/}
                             <div className="row">
                                 <div className="col-4 p-2">
                                     <label className="bodySmal">Size</label>
-                                    <select value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}  className="form-control my-2 form-select">
-                                        <option value="">Size</option>
-                                        {
-                                            ProductDetails[0]['details']['size'].split(",").map((item,i)=>{
-                                                return  <option value={item}>{item}</option>
-                                            })
-                                        }
-                                    </select>
+                                    {/*<select value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}  className="form-control my-2 form-select">*/}
+                                    {/*    <option value="">Size</option>*/}
+                                    {/*    {*/}
+                                    {/*        ProductDetails[0]['details']['size'].split(",").map((item,i)=>{*/}
+                                    {/*            return  <option value={item}>{item}</option>*/}
+                                    {/*        })*/}
+                                    {/*    }*/}
+                                    {/*</select>*/}
                                 </div>
+
+                                {/*------color button-----*/}
                                 <div className="col-4  p-2">
                                     <label className="bodySmal">Color</label>
-                                    <select value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}} className="form-control my-2 form-select">
-                                        <option value="">Color</option>
-                                        {
-                                            ProductDetails[0]['details']['color'].split(",").map((item,i)=>{
-                                                return  <option value={item}>{item}</option>
-                                            })
-                                        }
-                                    </select>
+                                    {/*<select value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}} className="form-control my-2 form-select">*/}
+                                    {/*    <option value="">Color</option>*/}
+                                    {/*    {*/}
+                                    {/*        ProductDetails[0]['details']['color'].split(",").map((item,i)=>{*/}
+                                    {/*            return  <option value={item}>{item}</option>*/}
+                                    {/*        })*/}
+                                    {/*    }*/}
+                                    {/*</select>*/}
                                 </div>
+
+                                {/*------Quantity button------------*/}
                                 <div className="col-4  p-2">
                                     <label className="bodySmal">Quantity</label>
                                     <div className="input-group my-2">
-                                        <button onClick={decrementQuantity} className="btn btn-outline-secondary">-</button>
-                                        <input value={quantity} type="text" className="form-control bg-light text-center" readOnly />
-                                        <button onClick={incrementQuantity}  className="btn btn-outline-secondary">+</button>
+                                        {/*<button onClick={decrementQuantity} className="btn btn-outline-secondary">-</button>*/}
+                                        {/*<input value={quantity} type="text" className="form-control bg-light text-center" readOnly />*/}
+                                        {/*<button onClick={incrementQuantity}  className="btn btn-outline-secondary">+</button>*/}
                                     </div>
                                 </div>
                                 <div className="col-4  p-2">
-                                    <CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Cart"/>
+                                    {/*<CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Cart"/>*/}
                                 </div>
                                 <div className="col-4  p-2">
 
-                                    <WishSubmitButton onClick={async ()=>{await AddWish(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Wish"/>
+                                    {/*<WishSubmitButton onClick={async ()=>{await AddWish(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Wish"/>*/}
 
                                 </div>
                             </div>
@@ -115,6 +135,7 @@ const DetailsComp = () => {
                     </div>
 
 
+                    {/*    ----------Specification button and review button--------*/}
                     <div className="row mt-3">
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item" role="presentation">
@@ -129,13 +150,17 @@ const DetailsComp = () => {
                             </li>
                         </ul>
                         <div className="tab-content" id="myTabContent">
+
+                            {/*-------Product description -----------------*/}
                             <div className="tab-pane fade show active" id="Speci-tab-pane" role="tabpanel" aria-labelledby="Speci-tab" tabIndex="0">
                                 {
                                     parse(ProductDetails[0]['details']['des'])
                                 }
                             </div>
+
+                            {/*-------Review component----------------*/}
                             <div className="tab-pane fade" id="Review-tab-pane" role="tabpanel" aria-labelledby="Review-tab" tabIndex="0">
-                                <Reviews/>
+                                {/*<Reviews/>*/}
                             </div>
                         </div>
                     </div>
