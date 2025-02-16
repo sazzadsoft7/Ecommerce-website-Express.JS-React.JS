@@ -1,8 +1,11 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {brandlogo} from "../../assets/assets.js";
+import productStore from "../../store/productStore.js";
 
 const AppNavbar = () => {
+    const {SearchKeyword, SetSearchKeyword} = productStore()
+
     return (
         <>
             <div className="container-fluid text-white p-2 bg-success">
@@ -102,16 +105,16 @@ const AppNavbar = () => {
                         <div className="input-group">
 
                             {/*------------Search bar ---------------*/}
-                            {/*<input onChange={(e) => SetSearchKeyword(e.target.value)} className="form-control"*/}
-                            {/*       type="search" placeholder="Search..." aria-label="Search"/>*/}
-                            {/*<Link to={SearchKeyword.length > 0 ? `/by-keyword/${SearchKeyword}` : `/`}*/}
-                            {/*      className="btn btn-outline-dark" type="submit">*/}
-                            {/*    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"*/}
-                            {/*         stroke="currentColor" style={{width: 24, height: 24}}>*/}
-                            {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}*/}
-                            {/*              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>*/}
-                            {/*    </svg>*/}
-                            {/*</Link>*/}
+                            <input onChange={(e) => SetSearchKeyword(e.target.value)} className="form-control"
+                                   type="search" placeholder="Search..." aria-label="Search"/>
+                            <Link to={SearchKeyword.length > 0 ? `/ProductListByKeyword/${SearchKeyword}` : `/`}
+                                  className="btn btn-outline-dark" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor" style={{width: 24, height: 24}}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </Link>
                         </div>
 
                         {/*------------------Login Logout------------*/}

@@ -11,6 +11,7 @@ import HowToBuy from "./pages/howToBuy.jsx";
 import Privacy from "./pages/privacy.jsx";
 import Refund from "./pages/refund.jsx";
 import Terms from "./pages/terms.jsx";
+import ProductListByKeyword from "./pages/ProductListByKeyword.jsx";
 
 const App = () => {
     return (
@@ -33,6 +34,8 @@ const App = () => {
                 <Route path="/ProductDetails/:id" element={<ProductDetails />} />
                 <Route path="/ProductListByBrand/:id" element={<ProductListByBrand />} />
                 <Route path="/ProductListByCategory/:id" element={<ProductListByCategory />} />
+                <Route path="/ProductListByKeyword/:key" element={<ProductListByKeyword />} />
+
 
             {/*    ----- Cart----*/}
             {/*    -------Wish--------*/}
