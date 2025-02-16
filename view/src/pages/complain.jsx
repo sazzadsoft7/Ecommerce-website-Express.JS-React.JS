@@ -1,10 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import Layout from "../components/layout/layout.jsx";
+import featureStore from "../store/featureStore.js";
+import LegalComp from "../components/feature/legalComp.jsx";
+
 
 const Complain = () => {
+
+    const {LegalDetailsRequest}=featureStore()
+
+    useEffect(() => {
+        (async()=>{
+            await LegalDetailsRequest('complain')
+        })()
+    }, []);
+
     return (
-        <div>
-            <h1>COmplain page</h1>
-        </div>
+        <Layout>
+            <LegalComp/>
+        </Layout>
     );
 };
 
