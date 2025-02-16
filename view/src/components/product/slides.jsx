@@ -19,6 +19,7 @@ const Slides = () => {
 
                     {/*=======Loop ==============*/}
                     {ProductSliderList.map((_, i) => (
+
                         // =======Navigation button==========
                         <button
                             key={i}
@@ -64,7 +65,7 @@ const Slides = () => {
                     ))}
                 </div>
 
-                {/* Navigation Buttons */}
+                {/* -----------Navigation Buttons */}
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
                     <span className="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>

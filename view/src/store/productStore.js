@@ -126,6 +126,13 @@ const productStore = create((set) => ({
             console.error(`Error fetching ProductDetails for ID ${id}:`, error);
         }
     },
+
+
+    SearchKeyword:"",
+    SetSearchKeyword:async(keyword)=>{
+        set({SearchKeyword:keyword})
+    },
+
 }));
 
 export default productStore;

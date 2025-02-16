@@ -4,11 +4,14 @@ import DetailsSkeleton from "../skeleton/detailsSkeleton.jsx";
 import GalleryImage from "./galleryImage.jsx";
 import {useParams} from "react-router-dom";
 import parse from "html-react-parser"
+import ReviewStore from "../../store/ReviewStore.js";
+import ReviewsComp from "../review/reviewsComp.jsx";
 
 
 const DetailsComp = () => {
 
     const {ProductDetails, ProductDetailsRequest}=productStore();
+    const {ReviewListRequest}= ReviewStore()
     const [quantity,SetQuantity]=useState(1);
 
     const {id}=useParams();
@@ -16,6 +19,7 @@ const DetailsComp = () => {
     useEffect(() => {
         (async ()=>{
             await ProductDetailsRequest(id);
+            await ReviewListRequest(id);
         })()
     }, []);
 
@@ -26,14 +30,14 @@ const DetailsComp = () => {
     // const {WishSaveRequest,WishListRequest}=WishStore()
 
     // -------increase & decrease quantity
-    // const incrementQuantity=()=>{
-    //     SetQuantity(quantity=>quantity+1)
-    // }
-    // const decrementQuantity=()=>{
-    //     if(quantity>1){
-    //         SetQuantity(quantity=>quantity-1)
-    //     }
-    // }
+    const incrementQuantity=()=>{
+        SetQuantity(quantity=>quantity+1)
+    }
+    const decrementQuantity=()=>{
+        if(quantity>1){
+            SetQuantity(quantity=>quantity-1)
+        }
+    }
 
 
     // -----wishlist function
@@ -90,40 +94,45 @@ const DetailsComp = () => {
                             <div className="row">
                                 <div className="col-4 p-2">
                                     <label className="bodySmal">Size</label>
-                                    {/*<select value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}  className="form-control my-2 form-select">*/}
-                                    {/*    <option value="">Size</option>*/}
-                                    {/*    {*/}
-                                    {/*        ProductDetails[0]['details']['size'].split(",").map((item,i)=>{*/}
-                                    {/*            return  <option value={item}>{item}</option>*/}
-                                    {/*        })*/}
-                                    {/*    }*/}
-                                    {/*</select>*/}
+
+                                    {/*value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}*/}
+                                    <select   className="form-control my-2 form-select">
+                                        <option value="">Size</option>
+                                        {
+                                            ProductDetails[0]['details']['size'].split(",").map((item,i)=>{
+                                                return  <option value={item}>{item}</option>
+                                            })
+                                        }
+                                    </select>
                                 </div>
 
                                 {/*------color button-----*/}
                                 <div className="col-4  p-2">
                                     <label className="bodySmal">Color</label>
-                                    {/*<select value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}} className="form-control my-2 form-select">*/}
-                                    {/*    <option value="">Color</option>*/}
-                                    {/*    {*/}
-                                    {/*        ProductDetails[0]['details']['color'].split(",").map((item,i)=>{*/}
-                                    {/*            return  <option value={item}>{item}</option>*/}
-                                    {/*        })*/}
-                                    {/*    }*/}
-                                    {/*</select>*/}
+
+                                    {/*value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}}*/}
+                                    <select  className="form-control my-2 form-select">
+                                        <option value="">Color</option>
+                                        {
+                                            ProductDetails[0]['details']['color'].split(",").map((item,i)=>{
+                                                return  <option value={item}>{item}</option>
+                                            })
+                                        }
+                                    </select>
                                 </div>
 
                                 {/*------Quantity button------------*/}
                                 <div className="col-4  p-2">
                                     <label className="bodySmal">Quantity</label>
                                     <div className="input-group my-2">
-                                        {/*<button onClick={decrementQuantity} className="btn btn-outline-secondary">-</button>*/}
-                                        {/*<input value={quantity} type="text" className="form-control bg-light text-center" readOnly />*/}
-                                        {/*<button onClick={incrementQuantity}  className="btn btn-outline-secondary">+</button>*/}
+                                        <button onClick={decrementQuantity} className="btn btn-outline-secondary">-</button>
+                                        <input value={quantity} type="text" className="form-control bg-light text-center" readOnly />
+                                        <button onClick={incrementQuantity}  className="btn btn-outline-secondary">+</button>
                                     </div>
                                 </div>
                                 <div className="col-4  p-2">
-                                    {/*<CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Cart"/>*/}
+
+                                    {/*<CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}}  className="btn w-100 btn-success" text="Add to Cart"/>*/}
                                 </div>
                                 <div className="col-4  p-2">
 
@@ -160,7 +169,7 @@ const DetailsComp = () => {
 
                             {/*-------Review component----------------*/}
                             <div className="tab-pane fade" id="Review-tab-pane" role="tabpanel" aria-labelledby="Review-tab" tabIndex="0">
-                                {/*<Reviews/>*/}
+                                <ReviewsComp/>
                             </div>
                         </div>
                     </div>
