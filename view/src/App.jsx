@@ -12,6 +12,7 @@ import Privacy from "./pages/privacy.jsx";
 import Refund from "./pages/refund.jsx";
 import Terms from "./pages/terms.jsx";
 import ProductListByKeyword from "./pages/ProductListByKeyword.jsx";
+import NoResult from "./components/layout/noResult.jsx";
 
 const App = () => {
     return (
@@ -36,6 +37,8 @@ const App = () => {
                 <Route path="/ProductListByCategory/:id" element={<ProductListByCategory />} />
                 <Route path="/ProductListByKeyword/:key" element={<ProductListByKeyword />} />
 
+            {/*    Other page*/}
+                <Route path='*' element={<NoResult/>}/>
 
             {/*    ----- Cart----*/}
             {/*    -------Wish--------*/}

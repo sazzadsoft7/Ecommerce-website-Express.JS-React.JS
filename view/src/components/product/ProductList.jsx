@@ -86,7 +86,7 @@ const ProductList = () => {
                         <div className="row">
 
                             {
-                                ProductList===null?(<ProductsSkeleton/>):(
+                                (ProductList===null || ProductList.length===0)?(<ProductsSkeleton/>):(
                                     <div className="container">
                                         <div className="row">
                                             {

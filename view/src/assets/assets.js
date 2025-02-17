@@ -10,3 +10,6 @@ export const paylogo = payimg;
 import animationdata from './images/animation.json';
 export const lottiedata = animationdata;
 
+//no Result image
+import noresultimage from './images/noResults.png'
+export const noResult = noresultimage
