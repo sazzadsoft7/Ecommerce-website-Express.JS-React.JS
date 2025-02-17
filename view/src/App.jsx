@@ -13,6 +13,9 @@ import Refund from "./pages/refund.jsx";
 import Terms from "./pages/terms.jsx";
 import ProductListByKeyword from "./pages/ProductListByKeyword.jsx";
 import NoResult from "./components/layout/noResult.jsx";
+import LoginPage from "./pages/loginPage.jsx";
+import OtpPage from "./pages/otpPage.jsx";
+import ProfilePage from "./pages/profilePage.jsx";
 
 const App = () => {
     return (
@@ -39,6 +42,12 @@ const App = () => {
 
             {/*    Other page*/}
                 <Route path='*' element={<NoResult/>}/>
+
+            {/*    ------Login*/}
+                <Route path='/login' element={<LoginPage/>}/>
+                <Route path='/otp' element={<OtpPage/>}/>
+                <Route path='/profile' element={<ProfilePage/>}/>
+
 
             {/*    ----- Cart----*/}
             {/*    -------Wish--------*/}

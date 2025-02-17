@@ -2,9 +2,35 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import {brandlogo} from "../../assets/assets.js";
 import productStore from "../../store/productStore.js";
+import userStore from "../../store/UserStore.js";
+import UserSubmitButton from "../user/UserSubmitButton.jsx";
 
 const AppNavbar = () => {
     const {SearchKeyword, SetSearchKeyword} = productStore()
+    const {isLogin, UserLogoutRequest} = userStore()
+
+
+    // const {CartCount,CartListRequest}=CartStore();
+    // const {WishCount,WishListRequest}=WishStore();
+
+    const onLogout=async ()=>{
+        await UserLogoutRequest()
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href="/"
+    }
+
+    // useEffect(() => {
+    //     (async ()=>{
+    //         if(isLogin()){
+    //             await  CartListRequest();
+    //             await  WishListRequest();
+    //         }
+    //     })()
+    // }, []);
+
+
+
 
     return (
         <>
@@ -118,24 +144,23 @@ const AppNavbar = () => {
                         </div>
 
                         {/*------------------Login Logout------------*/}
-                        {/*{*/}
-                        {/*    isLogin() ? (*/}
-
-                        {/*        <>*/}
-                        {/*            /!*-------------Logout--------------*!/*/}
-                        {/*            <UserSubmitButton onClick={onLogout} text="Logout"*/}
-                        {/*                              className="btn ms-3 btn-success d-flex"/>*/}
-                        {/*            /!*------------Profile button-----------*!/*/}
-                        {/*            <Link type="button" className="btn ms-3 btn-success d-flex"*/}
-                        {/*                  to="/profile">Profile</Link>*/}
-                        {/*        </>*/}
-                        {/*    ) : (*/}
-                        {/*        <>*/}
-                        {/*            /!*-----------Login Button-----------------*!/*/}
-                        {/*            <Link type="button" className="btn ms-3 btn-success d-flex" to="/login">Login</Link>*/}
-                        {/*        </>*/}
-                        {/*    )*/}
-                        {/*}*/}
+                        {
+                            isLogin() ? (
+                                <div className={"d-flex"}>
+                                    {/*-------------Logout--------------*/}
+                                    <UserSubmitButton onClick={onLogout} text="Logout"
+                                                      className="btn ms-3 btn-success d-flex"/>
+                                    {/*------------Profile button-----------*/}
+                                    <Link type="button" className="btn ms-3 btn-success d-flex"
+                                          to="/profile">Profile</Link>
+                                </div>
+                            ) : (
+                                <div className={"d-flex"}>
+                                    {/*-----------Login Button-----------------*/}
+                                    <Link type="button" className="btn ms-3 btn-success d-flex" to="/login">Login</Link>
+                                </div>
+                            )
+                        }
 
                     </div>
                 </div>

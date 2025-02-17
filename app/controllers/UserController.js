@@ -31,11 +31,6 @@ export const UserLogout=async (req,res)=>{
     return res.status(200).json({status:"success"})
 }
 
-// Create Profile controller
-export const CreateProfile=async (req,res)=>{
-    let result=await CreateProfileService(req)
-    return res.status(200).json(result)
-}
 
 // update profile controller
 export const UpdateProfile=async (req,res)=>{

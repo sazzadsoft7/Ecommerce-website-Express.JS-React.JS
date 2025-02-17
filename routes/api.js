@@ -34,7 +34,6 @@ router.get('/ProductDetails/:ProductID',ProductController.ProductDetails)
 router.get('/UserOTP/:email',UserController.UserOTP)
 router.get('/VerifyLogin/:email/:otp',UserController.VerifyLogin)
 router.get('/UserLogout',AuthVerification,UserController.UserLogout)
-router.post('/CreateProfile',AuthVerification,UserController.CreateProfile)
 router.post('/UpdateProfile',AuthVerification,UserController.UpdateProfile)
 router.get('/ReadProfile',AuthVerification,UserController.ReadProfile)
 
