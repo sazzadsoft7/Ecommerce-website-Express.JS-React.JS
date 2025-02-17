@@ -6,6 +6,11 @@ import {useParams} from "react-router-dom";
 import parse from "html-react-parser"
 import ReviewStore from "../../store/ReviewStore.js";
 import ReviewsComp from "../review/reviewsComp.jsx";
+import CartStore from "../../store/CartStore.js";
+import WishStore from "../../store/WishStore.js";
+import WishSubmitButton from "../wish/WishSubmitButton.jsx";
+import CartSubmitButton from "../cart/CartSubmitButton.jsx";
+import toast from "react-hot-toast";
 
 
 const DetailsComp = () => {
@@ -26,8 +31,8 @@ const DetailsComp = () => {
 
 
     // for cart and wishlist
-    // const {CartFormChange,CartForm,CartSaveRequest,CartListRequest}=CartStore()
-    // const {WishSaveRequest,WishListRequest}=WishStore()
+    const {CartFormChange,CartForm,CartSaveRequest,CartListRequest}=CartStore()
+    const {WishSaveRequest,WishListRequest}=WishStore()
 
     // -------increase & decrease quantity
     const incrementQuantity=()=>{
@@ -41,22 +46,22 @@ const DetailsComp = () => {
 
 
     // -----wishlist function
-    // const AddWish = async (productID,) => {
-    //     let res=await WishSaveRequest(productID);
-    //     if(res){
-    //         toast.success("Wish Item Added");
-    //         await  WishListRequest();
-    //     }
-    // }
+    const AddWish = async (productID,) => {
+        let res=await WishSaveRequest(productID);
+        if(res){
+            toast.success("Wish Item Added");
+            await  WishListRequest();
+        }
+    }
 
     // //-------Add to cart function
-    // const AddCart = async (productID,) => {
-    //     let res=await CartSaveRequest(CartForm,productID,quantity);
-    //     if(res){
-    //         toast.success("Cart Item Added");
-    //         await  CartListRequest();
-    //     }
-    // }
+    const AddCart = async (productID,) => {
+        let res=await CartSaveRequest(CartForm,productID,quantity);
+        if(res){
+            toast.success("Cart Item Added");
+            await  CartListRequest();
+        }
+    }
 
 
 
@@ -95,8 +100,8 @@ const DetailsComp = () => {
                                 <div className="col-4 p-2">
                                     <label className="bodySmal">Size</label>
 
-                                    {/*value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}*/}
-                                    <select   className="form-control my-2 form-select">
+
+                                    <select value={CartForm.size} onChange={(e)=>{CartFormChange('size',e.target.value)}}  className="form-control my-2 form-select">
                                         <option value="">Size</option>
                                         {
                                             ProductDetails[0]['details']['size'].split(",").map((item,i)=>{
@@ -110,8 +115,8 @@ const DetailsComp = () => {
                                 <div className="col-4  p-2">
                                     <label className="bodySmal">Color</label>
 
-                                    {/*value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}}*/}
-                                    <select  className="form-control my-2 form-select">
+
+                                    <select value={CartForm.color} onChange={(e)=>{CartFormChange('color',e.target.value)}} className="form-control my-2 form-select">
                                         <option value="">Color</option>
                                         {
                                             ProductDetails[0]['details']['color'].split(",").map((item,i)=>{
@@ -132,11 +137,11 @@ const DetailsComp = () => {
                                 </div>
                                 <div className="col-4  p-2">
 
-                                    {/*<CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}}  className="btn w-100 btn-success" text="Add to Cart"/>*/}
+                                    <CartSubmitButton onClick={async ()=>{await AddCart(ProductDetails[0]['_id'])}}  className="btn w-100 btn-success" text="Add to Cart"/>
                                 </div>
                                 <div className="col-4  p-2">
 
-                                    {/*<WishSubmitButton onClick={async ()=>{await AddWish(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Wish"/>*/}
+                                    <WishSubmitButton onClick={async ()=>{await AddWish(ProductDetails[0]['_id'])}} className="btn w-100 btn-success" text="Add to Wish"/>
 
                                 </div>
                             </div>

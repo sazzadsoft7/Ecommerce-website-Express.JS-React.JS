@@ -16,6 +16,8 @@ import NoResult from "./components/layout/noResult.jsx";
 import LoginPage from "./pages/loginPage.jsx";
 import OtpPage from "./pages/otpPage.jsx";
 import ProfilePage from "./pages/profilePage.jsx";
+import CartPage from "./pages/cartPage.jsx";
+import WishPage from "./pages/wishPage.jsx";
 
 const App = () => {
     return (
@@ -48,10 +50,14 @@ const App = () => {
                 <Route path='/otp' element={<OtpPage/>}/>
                 <Route path='/profile' element={<ProfilePage/>}/>
 
-
             {/*    ----- Cart----*/}
+                <Route path='/cart' element={<CartPage/>}/>
+
             {/*    -------Wish--------*/}
-            {/*    -----Invoice---------*/}
+                <Route path='/wish' element={<WishPage/>}/>
+
+            {/*    -----Order---------*/}
+            {/*    <Route path='/order' element={<OrderPage/>}/>*/}
             {/*    ------Review-----*/}
             </Routes>
         </BrowserRouter>

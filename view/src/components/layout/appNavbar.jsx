@@ -1,17 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {brandlogo} from "../../assets/assets.js";
 import productStore from "../../store/productStore.js";
 import userStore from "../../store/UserStore.js";
 import UserSubmitButton from "../user/UserSubmitButton.jsx";
+import CartStore from "../../store/CartStore.js";
+import WishStore from "../../store/WishStore.js";
 
 const AppNavbar = () => {
     const {SearchKeyword, SetSearchKeyword} = productStore()
     const {isLogin, UserLogoutRequest} = userStore()
 
 
-    // const {CartCount,CartListRequest}=CartStore();
-    // const {WishCount,WishListRequest}=WishStore();
+    const {CartCount,CartListRequest}=CartStore();
+    const {WishCount,WishListRequest}=WishStore();
 
     const onLogout=async ()=>{
         await UserLogoutRequest()
@@ -20,14 +22,14 @@ const AppNavbar = () => {
         window.location.href="/"
     }
 
-    // useEffect(() => {
-    //     (async ()=>{
-    //         if(isLogin()){
-    //             await  CartListRequest();
-    //             await  WishListRequest();
-    //         }
-    //     })()
-    // }, []);
+    useEffect(() => {
+        (async ()=>{
+            if(isLogin()){
+                await  CartListRequest();
+                await  WishListRequest();
+            }
+        })()
+    }, []);
 
 
 
@@ -105,23 +107,23 @@ const AppNavbar = () => {
                                     className="bi bi-house"></i> Home</Link>
 
                                  {/*--------Cart page Link------------*/}
-                                 {/*<Link to="/cart" type="button" className="btn ms-2 btn-light position-relative">*/}
-                                 {/*       <i className="bi text-dark bi-bag"></i> Cart*/}
-                                 {/*    /!*   -------Cart Count-----------*!/*/}
-                                 {/*    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">{CartCount}</span>*/}
-                                 {/*</Link>*/}
+                                 <Link to="/cart" type="button" className="btn ms-2 btn-light position-relative">
+                                        <i className="bi text-dark bi-bag"></i> Cart
+                                     {/*   -------Cart Count-----------*/}
+                                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">{CartCount}</span>
+                                 </Link>
 
                                  {/*----------Wish page link------------*/}
-                                 {/*<Link to="/wish" type="button" className="btn ms-4 btn-light position-relative">*/}
-                                 {/*       <i className="bi text-dark bi-heart"></i> Wish*/}
-                                 {/*    /!*   ------Wish count----------*!/*/}
-                                 {/*    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{WishCount}</span>*/}
-                                 {/*   </Link>*/}
+                                 <Link to="/wish" type="button" className="btn ms-4 btn-light position-relative">
+                                        <i className="bi text-dark bi-heart"></i> Wish
+                                     {/*   ------Wish count----------*/}
+                                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">{WishCount}</span>
+                                    </Link>
 
                                 {/*-----------Orders page link-------------*/}
-                                {/*<Link to="/orders" type="button" className="btn ms-4 btn-light position-relative">*/}
-                                {/*        <i className="bi text-dark  bi-truck"></i> Order*/}
-                                {/*</Link>*/}
+                                <Link to="/orders" type="button" className="btn ms-4 btn-light position-relative">
+                                        <i className="bi text-dark  bi-truck"></i> Order
+                                </Link>
                             </span>
                         </ul>
                     </div>
