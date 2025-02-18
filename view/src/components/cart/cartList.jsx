@@ -3,10 +3,12 @@ import cartStore from "../../store/CartStore.js";
 import CartSubmitButton from "./CartSubmitButton.jsx";
 import NoData from "../layout/noResult.jsx";
 import CartSkeleton from "../../components/skeleton/cartSkeleton.jsx";
+import InvoiceStore from "../../store/InvoiceStore.js";
 
 const CartList = () => {
 
-    const {CartTotal,CartVatTotal,CartPayableTotal,CartListRequest,CartList,CreateInvoiceRequest,RemoveCartListRequest}=cartStore();
+    const {CartTotal,CartVatTotal,CartPayableTotal,CartListRequest,CartList,RemoveCartListRequest}=cartStore();
+    const {CreateInvoiceRequest} = InvoiceStore()
 
     useEffect(() => {
         (async ()=>{

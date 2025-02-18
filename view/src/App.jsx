@@ -18,6 +18,8 @@ import OtpPage from "./pages/otpPage.jsx";
 import ProfilePage from "./pages/profilePage.jsx";
 import CartPage from "./pages/cartPage.jsx";
 import WishPage from "./pages/wishPage.jsx";
+import InvoicePage from "./pages/invoicePage.jsx";
+import OrderPage from "./pages/orderPage.jsx";
 
 const App = () => {
     return (
@@ -57,8 +59,9 @@ const App = () => {
                 <Route path='/wish' element={<WishPage/>}/>
 
             {/*    -----Order---------*/}
-            {/*    <Route path='/order' element={<OrderPage/>}/>*/}
-            {/*    ------Review-----*/}
+                <Route path='/orders' element={<OrderPage/>}/>
+                <Route path='/invoice/:id' element={<InvoicePage/>}/>
+
             </Routes>
         </BrowserRouter>
     );
